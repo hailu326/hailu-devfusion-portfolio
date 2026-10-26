@@ -86,9 +86,39 @@
     youtube: "https://www.youtube.com/@DigitalCreativeTechnologist"
   };
 
+  // Add the final Student Task Management System URL here when implementation is complete.
+  const STUDENT_TASK_MANAGEMENT_URL = "";
+
+  // Digital creativity video: edit only these URLs to update the preview.
+  // Use a direct MP4/WebM file URL for EDITING_VIDEO_URL.
+  const EDITING_VIDEO_URL = "assets/1021.mp4";
+  const EDITING_VIDEO_THUMBNAIL = "assets/project-video.jpg";
+
+  const studentProjectLink = document.querySelector("[data-student-project-link]");
+  if (studentProjectLink && /^https?:\/\/\S+/i.test(STUDENT_TASK_MANAGEMENT_URL)) {
+    studentProjectLink.href = STUDENT_TASK_MANAGEMENT_URL;
+    studentProjectLink.textContent = "View Project";
+    studentProjectLink.removeAttribute("aria-disabled");
+    studentProjectLink.target = "_blank";
+    studentProjectLink.rel = "noopener noreferrer";
+  }
+
+  const editingVideo = document.querySelector("#editing-video-player");
+  const editingVideoSource = document.querySelector("#editing-video-source");
+  const editingVideoEmptyState = document.querySelector("#video-empty-state");
+  if (editingVideo && editingVideoSource) {
+    if (EDITING_VIDEO_THUMBNAIL) editingVideo.poster = EDITING_VIDEO_THUMBNAIL;
+    if (EDITING_VIDEO_URL && /^https?:\/\/\S+|^assets\//i.test(EDITING_VIDEO_URL)) {
+      editingVideoSource.src = EDITING_VIDEO_URL;
+      editingVideo.hidden = false;
+      if (editingVideoEmptyState) editingVideoEmptyState.hidden = true;
+      editingVideo.load();
+    }
+  }
+
   const emailIsPlaceholder = !contactDetails.email ||
     contactDetails.email === "YOUR_EMAIL@example.com" ||
-    contactDetails.email.includes("hailutadese786@gmail.com");
+    contactDetails.email.includes("YOUR_EMAIL");
 
   document.querySelectorAll("[data-email-link]").forEach((link) => {
     if (emailIsPlaceholder) {
