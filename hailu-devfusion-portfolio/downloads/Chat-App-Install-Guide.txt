@@ -1,0 +1,21 @@
+HAILACHO Chat App — Install Guide
+
+Live app: https://chat-app-1-x96z.onrender.com
+
+PHONE (Android / Chrome)
+1. Open the live app link in Chrome.
+2. Sign in using your own account.
+3. Open Chrome's menu (three dots).
+4. Choose “Install app” or “Add to Home screen” if the browser offers it.
+5. Confirm, then launch it from your home screen.
+
+COMPUTER (Chrome / Edge)
+1. Open the live app link.
+2. Look for the install icon in the address bar, or open the browser menu.
+3. Choose “Install app” if available and confirm.
+
+IMPORTANT
+- This is a web/PWA installation path; it does not mean a separate APK installer exists.
+- If Install is not offered, use “Add to Home screen” on a supported browser or keep using the website.
+- The free Render service may take a short time to wake after inactivity.
+- Do not share passwords or private chat data.

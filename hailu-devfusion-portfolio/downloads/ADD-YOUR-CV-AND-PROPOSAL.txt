@@ -1,0 +1,8 @@
+Add your own real documents here before publishing:
+
+1. CV PDF filename: Hailu-Tadese-CV.pdf
+   Place at: downloads/Hailu-Tadese-CV.pdf
+2. Chat App proposal PDF filename: HAILACHO-Chat-App-Proposal.pdf
+   Place at: downloads/HAILACHO-Chat-App-Proposal.pdf
+
+These documents were not included in the uploaded files, so they have not been fabricated.
