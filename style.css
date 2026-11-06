@@ -834,3 +834,161 @@ a[href="downloads/ChatApp_Documentation.pdf"]:hover {
   color: #061329 !important;
   border-color: #75dfff !important;
 }
+
+/* Portfolio update: keep the profile image clipped to its own photo frame. */
+.photo-placeholder {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.profile-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  border-radius: inherit;
+}
+
+/* ==========================================================
+   Hailu DevFusion — Skills section refinement (v2)
+   Keeps the existing navy / cyan visual identity.
+   ========================================================== */
+.skills-section {
+  padding-top: clamp(68px, 8vw, 104px);
+  padding-bottom: clamp(68px, 8vw, 104px);
+  background: linear-gradient(180deg, #07152d 0%, #091a36 100%) !important;
+}
+.skills-section .section-heading {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.skills-section .section-heading > p {
+  max-width: 420px;
+  color: #b5c6e0;
+}
+.skills-section .skill-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 20px;
+}
+.skills-section .skill-group {
+  min-width: 0;
+  height: 100%;
+  padding: clamp(18px, 2vw, 24px);
+  border: 1px solid rgba(125, 166, 230, .19);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(17, 39, 77, .96), rgba(8, 25, 52, .98));
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .13);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.skills-section .skill-group:hover {
+  transform: translateY(-4px);
+  border-color: rgba(102, 217, 255, .48);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .2);
+}
+.skills-section .skill-group-heading {
+  min-height: 66px;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 6px;
+  border-bottom-color: rgba(150, 183, 235, .14);
+}
+.skills-section .group-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 12px;
+  color: #75e3ff;
+  background: rgba(69, 139, 235, .14);
+  border-color: rgba(102, 217, 255, .25);
+}
+.skills-section .skill-group-heading h3 {
+  color: #f2f7ff;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.skills-section .skill-group-heading p {
+  color: #9db1d0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.skills-section .skill-list {
+  gap: 0;
+}
+.skills-section .skill-item {
+  min-width: 0;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(150, 183, 235, .08);
+}
+.skills-section .skill-item:last-child {
+  border-bottom: 0;
+}
+.skills-section .skill-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 1px solid rgba(102, 217, 255, .13);
+  border-radius: 10px;
+  color: #8fe8ff;
+  background: rgba(67, 132, 220, .15);
+}
+.skills-section .skill-item > span:last-child {
+  min-width: 0;
+}
+.skills-section .skill-item strong {
+  color: #f1f6ff;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.skills-section .skill-item small {
+  color: #a9bbd7;
+  font-size: 10px;
+  line-height: 1.5;
+}
+/* Make the two mobile technologies visibly learning-stage, not claimed expertise. */
+.skills-section .skill-group:nth-child(5) .skill-item small {
+  color: #8de6ff;
+}
+.skills-section .skill-group:nth-child(5) .skill-item small::before {
+  content: "LEARNING · ";
+  color: #6bdfff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .65px;
+}
+.skills-section .skills-disclaimer {
+  max-width: 760px;
+  margin: 22px auto 0;
+  padding: 12px 15px;
+  border: 1px solid rgba(102, 217, 255, .15);
+  border-radius: 10px;
+  color: #b5c8e4;
+  background: rgba(18, 48, 88, .38);
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+@media (min-width: 821px) and (max-width: 1100px) {
+  .skills-section .skill-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+  .skills-section .skill-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skills-section .section-heading { align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .skills-section .skill-groups { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .skills-section .skill-group { padding: 19px; }
+  .skills-section .section-heading { display: block; }
+  .skills-section .section-heading > p { margin-top: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-section .skill-group { transition: none; }
+  .skills-section .skill-group:hover { transform: none; }
+}

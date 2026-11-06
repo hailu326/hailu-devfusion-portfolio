@@ -1,12 +1,15 @@
+
 /* Hailu DevFusion interactions — no framework required */
 (() => {
   "use strict";
 
+  // Mobile navigation menu
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector("#nav-links");
 
   function closeMenu() {
     if (!menuToggle || !navLinks) return;
+
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute("aria-label", "Open navigation menu");
     navLinks.classList.remove("is-open");
@@ -15,9 +18,15 @@
 
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", () => {
-      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
+
       menuToggle.setAttribute("aria-expanded", String(!isOpen));
-      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Open navigation menu" : "Close navigation menu"
+      );
+
       navLinks.classList.toggle("is-open", !isOpen);
       document.body.classList.toggle("menu-open", !isOpen);
     });
@@ -35,88 +44,143 @@
     });
   }
 
-  // Accessible project category filter.
-  const filterButtons = document.querySelectorAll(".filter-button");
-  const projectCards = document.querySelectorAll(".project-card");
+  // Project category filter
+  const filterButtons =
+    document.querySelectorAll(".filter-button");
+
+  const projectCards =
+    document.querySelectorAll(".project-card");
+
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const filter = button.dataset.filter;
+
       filterButtons.forEach((item) => {
         const selected = item === button;
+
         item.classList.toggle("active", selected);
         item.setAttribute("aria-pressed", String(selected));
       });
+
       projectCards.forEach((card) => {
-        const show = filter === "all" || card.dataset.category === filter;
+        const show =
+          filter === "all" ||
+          card.dataset.category === filter;
+
         card.classList.toggle("is-hidden", !show);
       });
     });
   });
 
-  // Reveal elements as they enter view; gracefully fall back without IntersectionObserver.
-  const revealElements = document.querySelectorAll(".reveal");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Scroll reveal animation
+  const revealElements =
+    document.querySelectorAll(".reveal");
+
+  const reduceMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
   if ("IntersectionObserver" in window && !reduceMotion) {
-    const observer = new IntersectionObserver((entries, currentObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          currentObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealElements.forEach((element) => observer.observe(element));
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
   } else {
-    revealElements.forEach((element) => element.classList.add("is-visible"));
+    revealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
   }
 
-  // Automatically update the footer year.
+  // Automatically update footer year
   const year = document.querySelector("#year");
-  if (year) year.textContent = new Date().getFullYear();
 
-  /*
-   * PERSONALIZE YOUR CONTACT DETAILS:
-   * Replace the sample values below with your real URLs/email.
-   * Keep the full https:// URL for social profiles.
-   */
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  // Contact details
   const contactDetails = {
     email: "hailutadese786@gmail.com",
     github: "https://github.com/hailu326",
     linkedin: "https://www.linkedin.com/in/hailu-tadese",
-    youtube: "https://www.youtube.com/@DigitalCreativeTechnologist"
+    youtube:
+      "https://www.youtube.com/@DigitalCreativeTechnologist"
   };
 
-  // Add the final Student Task Management System URL here when implementation is complete.
+  // Add your Student Task Management System URL
+  // when the project is ready for public viewing.
   const STUDENT_TASK_MANAGEMENT_URL = "";
 
-  // Digital creativity video: edit only these URLs to update the preview.
-  // Use a direct MP4/WebM file URL for EDITING_VIDEO_URL.
+  // Digital creativity video
   const EDITING_VIDEO_URL = "assets/1021.mp4";
-  const EDITING_VIDEO_THUMBNAIL = "assets/project-video.jpg";
 
-  const studentProjectLink = document.querySelector("[data-student-project-link]");
-  if (studentProjectLink && /^https?:\/\/\S+/i.test(STUDENT_TASK_MANAGEMENT_URL)) {
-    studentProjectLink.href = STUDENT_TASK_MANAGEMENT_URL;
+  // Updated to an image file that exists in the project archive
+  const EDITING_VIDEO_THUMBNAIL =
+    "assets/youtube-thumbnail.png";
+
+  // Student Task Management project link
+  const studentProjectLink =
+    document.querySelector("[data-student-project-link]");
+
+  if (
+    studentProjectLink &&
+    /^https?:\/\/\S+/i.test(STUDENT_TASK_MANAGEMENT_URL)
+  ) {
+    studentProjectLink.href =
+      STUDENT_TASK_MANAGEMENT_URL;
+
     studentProjectLink.textContent = "View Project";
     studentProjectLink.removeAttribute("aria-disabled");
     studentProjectLink.target = "_blank";
     studentProjectLink.rel = "noopener noreferrer";
   }
 
-  const editingVideo = document.querySelector("#editing-video-player");
-  const editingVideoSource = document.querySelector("#editing-video-source");
-  const editingVideoEmptyState = document.querySelector("#video-empty-state");
+  // Video preview
+  const editingVideo =
+    document.querySelector("#editing-video-player");
+
+  const editingVideoSource =
+    document.querySelector("#editing-video-source");
+
+  const editingVideoEmptyState =
+    document.querySelector("#video-empty-state");
+
   if (editingVideo && editingVideoSource) {
-    if (EDITING_VIDEO_THUMBNAIL) editingVideo.poster = EDITING_VIDEO_THUMBNAIL;
-    if (EDITING_VIDEO_URL && /^https?:\/\/\S+|^assets\//i.test(EDITING_VIDEO_URL)) {
+    if (EDITING_VIDEO_THUMBNAIL) {
+      editingVideo.poster = EDITING_VIDEO_THUMBNAIL;
+    }
+
+    if (
+      EDITING_VIDEO_URL &&
+      (/^https?:\/\/\S+/i.test(EDITING_VIDEO_URL) ||
+        /^assets\//i.test(EDITING_VIDEO_URL))
+    ) {
       editingVideoSource.src = EDITING_VIDEO_URL;
       editingVideo.hidden = false;
-      if (editingVideoEmptyState) editingVideoEmptyState.hidden = true;
+
+      if (editingVideoEmptyState) {
+        editingVideoEmptyState.hidden = true;
+      }
+
       editingVideo.load();
     }
   }
 
-  const emailIsPlaceholder = !contactDetails.email ||
+  // Email links
+  const emailIsPlaceholder =
+    !contactDetails.email ||
     contactDetails.email === "YOUR_EMAIL@example.com" ||
     contactDetails.email.includes("YOUR_EMAIL");
 
@@ -124,40 +188,66 @@
     if (emailIsPlaceholder) {
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        alert("Please add your real email address in script.js and index.html before using this link.");
+
+        alert(
+          "Please add your real email address in script.js and index.html before using this link."
+        );
       });
     } else {
       link.href = `mailto:${contactDetails.email}`;
     }
   });
+
   document.querySelectorAll("[data-email-text]").forEach((element) => {
     element.textContent = contactDetails.email;
   });
 
-  Object.entries({
+  // Social media links
+  const socialPlaceholders = {
     github: "https://github.com/account",
     linkedin: "Add your LinkedIn profile",
     youtube: "Add your YouTube channel"
-  }).forEach(([network, placeholder]) => {
-    const url = contactDetails[network];
-    const validUrl = typeof url === "string" && /^https:\/\/\S+/i.test(url) &&
-      !url.endsWith("github.com/") && !url.endsWith("linkedin.com/") && !url.endsWith("youtube.com/");
-    document.querySelectorAll(`[data-social="${network}"]`).forEach((link) => {
-      if (validUrl) {
-        link.href = url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-      } else {
-        link.href = "#contact";
-        link.removeAttribute("target");
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          alert(`Add your real ${network} profile URL in script.js before using this link.`);
+  };
+
+  Object.entries(socialPlaceholders).forEach(
+    ([network, placeholder]) => {
+      const url = contactDetails[network];
+
+      const validUrl =
+        typeof url === "string" &&
+        /^https:\/\/\S+/i.test(url) &&
+        !url.endsWith("github.com/") &&
+        !url.endsWith("linkedin.com/") &&
+        !url.endsWith("youtube.com/");
+
+      document
+        .querySelectorAll(`[data-social="${network}"]`)
+        .forEach((link) => {
+          if (validUrl) {
+            link.href = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+          } else {
+            link.href = "#contact";
+            link.removeAttribute("target");
+
+            link.addEventListener("click", (event) => {
+              event.preventDefault();
+
+              alert(
+                `Add your real ${network} profile URL in script.js before using this link.`
+              );
+            });
+          }
         });
-      }
-    });
-    document.querySelectorAll(`[data-social-text="${network}"]`).forEach((element) => {
-      element.textContent = validUrl ? url.replace(/^https:\/\/(www\.)?/, "") : placeholder;
-    });
-  });
+
+      document
+        .querySelectorAll(`[data-social-text="${network}"]`)
+        .forEach((element) => {
+          element.textContent = validUrl
+            ? url.replace(/^https:\/\/(www\.)?/, "")
+            : placeholder;
+        });
+    }
+  );
 })();
